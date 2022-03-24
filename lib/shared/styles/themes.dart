@@ -1,15 +1,14 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shopapp/shared/styles/colors.dart';
-
+import 'colors.dart';
 ThemeData lightTheme = ThemeData(
- primarySwatch: blue,
-
+  primarySwatch: blue,
   textTheme: const TextTheme(
     bodyText1: TextStyle(
-        color: Colors.black,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold),
+      color: Colors.black,
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+    ),
     bodyText2: TextStyle(
       color: Colors.black,
       fontSize: 16.0,
@@ -31,16 +30,13 @@ ThemeData lightTheme = ThemeData(
       size: 30.0,
     ),
     unselectedLabelStyle: const TextStyle(
-        color: Colors.black,
-        fontSize: 18.0,
-        fontWeight: FontWeight.normal),
+        color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.normal),
     selectedLabelStyle: const TextStyle(
-        color: Colors.black,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold),
+        color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold),
   ),
   appBarTheme: const AppBarTheme(
     titleSpacing: 20.0,
+    centerTitle: true,
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.white,
@@ -59,24 +55,24 @@ ThemeData lightTheme = ThemeData(
   ),
 );
 ThemeData darkTheme = ThemeData(
-  primarySwatch: defultColor,
+  primarySwatch: Colors.blue,
+  drawerTheme:  DrawerThemeData(backgroundColor: Colors.black12.withOpacity(.6)),
+  secondaryHeaderColor: Colors.white,
   textTheme: const TextTheme(
     bodyText1: TextStyle(
-        color: Colors.black,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold),
+        color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
     bodyText2: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontSize: 16.0,
       fontWeight: FontWeight.normal,
     ),
   ),
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: Colors.black,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black12.withOpacity(.6),
     elevation: 20.0,
     selectedItemColor: Colors.blue,
-    unselectedItemColor: Colors.black,
+    unselectedItemColor: Colors.white,
     unselectedIconTheme: IconThemeData(
       color: Colors.grey[600],
       size: 30.0,
@@ -86,30 +82,26 @@ ThemeData darkTheme = ThemeData(
       size: 30.0,
     ),
     unselectedLabelStyle: const TextStyle(
-        color: Colors.black,
-        fontSize: 18.0,
-        fontWeight: FontWeight.normal),
+        color: Colors.white, fontSize: 18.0, fontWeight: FontWeight.normal),
     selectedLabelStyle: const TextStyle(
-        color: Colors.black,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold),
+        color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
   ),
-  appBarTheme: const AppBarTheme(
+  appBarTheme:  AppBarTheme(
     titleSpacing: 20.0,
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.black12.withOpacity(.6),
+      statusBarIconBrightness: Brightness.light,
     ),
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black12.withOpacity(.6),
     elevation: 0.0,
     titleTextStyle: TextStyle(
-      color: Colors.black,
+      color: Colors.white,
       fontSize: 20.0,
       fontWeight: FontWeight.bold,
     ),
     iconTheme: IconThemeData(
-      color: Colors.black,
+      color: Colors.white,
     ),
   ),
 );

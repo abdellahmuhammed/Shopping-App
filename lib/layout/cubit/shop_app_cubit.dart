@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopapp/modules/categories/categoties.dart';
+import 'package:shopapp/modules/favorite/favorite.dart';
+import 'package:shopapp/modules/produts/produts.dart';
 part 'shop_app_state.dart';
 
 class ShopAppCubit extends Cubit<ShopAppState> {
@@ -37,6 +40,14 @@ class ShopAppCubit extends Cubit<ShopAppState> {
             icon:  Icon(Icons.favorite),label: 'favorites'),
       ];
 
+
+  List <Widget> screens =
+  [
+    const ProductsScreen(),
+    const CategoriesScreen(),
+    const FavoriteScreen(),
+
+  ];
 
   var currentIndex= 0;
 
