@@ -14,3 +14,19 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+
+
+echo "# ShopApp" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/abdellahmuhammed/ShopApp.git
+git push -u origin main
+
+
+git remote add origin https://github.com/abdellahmuhammed/ShopApp.git
+git branch -M main
+git push -u origin main
