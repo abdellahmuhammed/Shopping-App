@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
-import 'package:shopapp/layout/homelayout.dart';
 import 'package:shopapp/modules/Registration/Registration.dart';
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/styles/colors.dart';
@@ -132,12 +132,23 @@ class LoginScreen extends StatelessWidget {
                         )
                       ],
                     ),
-                    defultMaterialButton(
+                    ConditionalBuilder(
+                      condition:state is! LoadingUserLoginState ,
+                      builder: (context)=> defultMaterialButton(
                         text: 'Login',
                         background: grey.withOpacity(.40),
                         function: () {
-                          NavigateTo(context, const HomeLayoutScreen());
-                        }),
+                          if(formKey.currentState.validate()){
+                            cubit.userLogin(
+                                email: emailController.text,
+                                password: passwordController.text
+                            );
+                          }
+                          //  NavigateTo(context, const HomeLayoutScreen());
+                        },
+                      ),
+                      fallback: (context)=> const Center(child:  CircularProgressIndicator()),
+                    ),
                     Row(
                       children:  [
                          Text(

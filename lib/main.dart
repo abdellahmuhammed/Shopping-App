@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopapp/MyBlocObserver.dart';
 import 'package:shopapp/layout/DarkMode/dark_mode_cubit.dart';
 import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
 import 'package:shopapp/layout/homelayout.dart';
+import 'package:shopapp/modules/login/LoginScreen.dart';
 import 'package:shopapp/modules/onboarding/onboarding.dart';
+import 'package:shopapp/shared/network/remote/diohelper.dart';
 import 'package:shopapp/shared/styles/themes.dart';
 
 void main() async {
-  runApp(const MyApp());
+  BlocOverrides.runZoned(
+        () {
+          runApp(const MyApp());
+    },
+    blocObserver: MyBlocObserver(),
+  );
+  DioHelper.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +45,7 @@ class MyApp extends StatelessWidget {
             themeMode: DarkModeCubit.get(context).isDarkShow
                 ? ThemeMode.dark
                 : ThemeMode.light,
-            home: const HomeLayoutScreen(),
+            home:  LoginScreen(),
           );
         },
       ),

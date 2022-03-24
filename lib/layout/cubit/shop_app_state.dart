@@ -4,22 +4,16 @@ part of 'shop_app_cubit.dart';
 
 @immutable
 abstract class ShopAppState {}
-
 class ShopAppInitial extends ShopAppState {}
 
 class changeIconState extends ShopAppState {}
-
 class confirmepasswordState extends ShopAppState {}
-
 class changeBottomNavBarState extends ShopAppState {}
 
 
-class LoadingDataState extends ShopAppState {}
-
-class GetDataSuccessState extends ShopAppState {}
-
-class GetDataErrorState extends ShopAppState {
+class LoadingUserLoginState extends ShopAppState {}
+class UserLoginSuccessState extends ShopAppState {}
+class UserLoginErrorState extends ShopAppState {
   final onError;
-
-  GetDataErrorState(this.onError);
+  UserLoginErrorState(this.onError);
 }

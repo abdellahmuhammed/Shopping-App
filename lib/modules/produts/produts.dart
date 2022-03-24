@@ -28,7 +28,7 @@ class ProductsScreen extends StatelessWidget {
           // ),
           CarouselSlider(
               options: CarouselOptions(
-                  height: 300,
+                  height: MediaQuery.of(context).size.height* .2,
                 initialPage: 0,
                 autoPlay: true,
                 viewportFraction: 1.0,
@@ -71,7 +71,7 @@ class ProductsScreen extends StatelessWidget {
 
               ],
             ),
-          )
+          ),
         ],
       ),
     );
