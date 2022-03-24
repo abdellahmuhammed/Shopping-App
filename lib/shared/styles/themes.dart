@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
 ThemeData lightTheme = ThemeData(
- primarySwatch: deepOrange,
+ primarySwatch: blue,
 
   textTheme: const TextTheme(
     bodyText1: TextStyle(
@@ -59,7 +59,7 @@ ThemeData lightTheme = ThemeData(
   ),
 );
 ThemeData darkTheme = ThemeData(
-  primarySwatch: deepOrange,
+  primarySwatch: defultColor,
   textTheme: const TextTheme(
     bodyText1: TextStyle(
         color: Colors.black,

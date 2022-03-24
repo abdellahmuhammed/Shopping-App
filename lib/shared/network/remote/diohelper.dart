@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -20,7 +22,6 @@ class DioHelper {
       queryParameters: query,
     );
   }
-
   static Future<Response> postData(
       String url,
      FormData data ,

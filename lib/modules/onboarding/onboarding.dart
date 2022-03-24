@@ -1,5 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:shopapp/modules/login/ShopApplogin.dart';
+import 'package:shopapp/modules/login/LoginScreen.dart';
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -14,6 +16,8 @@ class BoardingModel
 
 class OnBoardingScreen extends StatefulWidget
 {
+  const OnBoardingScreen({Key key}) : super(key: key);
+
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
@@ -26,17 +30,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     BoardingModel(
       title:
           'تأكـد مـن اتباعـك أنـت والمحيطيـن بـك ممارسـات النظافـة الجيـدة و تنفـس هـواء النقـي',
-      image: 'assets/images/corona.png',
+      image: 'assets/images/3776133.jpg',
     ),
     BoardingModel(
       title:
           'تتمثــل أعــراض الاكثـر شــيوعًا لمــرض كوفيــد-19 فــي الحمــى والســـــــــعال الجـاف وضيـق فـي التنفـس ',
-      image: 'assets/images/corona.png',
+      image: 'assets/images/3859310.jpg',
     ),
     BoardingModel(
         title:
             'اســتخدام الكمامــات الواقيــة اثنــاء الجلــوس مـع اكثـر مـن اثنيـن او عنـد الخـروج مـن المنـزل',
-        image: 'assets/images/corona.png'),
+        image: 'assets/images/4058271.jpg'),
   ];
   bool isLast = false;
 
@@ -45,11 +49,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     return Scaffold(
       appBar: AppBar(
         actions: [
-          defultTextButton(
-            function: () {
-              NavigateAndRemove(context, ShopAppLoginScreen());
+          TextButton(
+            onPressed: () {
+              NavigateAndRemove(context, LoginScreen());
             },
-            text: 'skip',
+            child: const Text('skip'),
           ),
         ],
       ),
@@ -62,18 +66,20 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                 physics: const BouncingScrollPhysics(),
                 controller: BoardingCotroller,
                 onPageChanged: (int index) {
-                  if (index == BoardingList.length - 1) {
+                  if (index == BoardingList.length - 1)
+                  {
                     setState(() {
                       isLast = true;
                     });
-                  } else {
+                  } else
+                  {
                     setState(() {
                       isLast = false;
                     });
                   }
                 },
                 itemBuilder: (context, index) =>
-                    ItemBilder(BoardingList[index]),
+                    ItemBuilder(BoardingList[index]),
                 itemCount: BoardingList.length,
               ),
             ),
@@ -84,7 +90,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                   count: BoardingList.length,
                   effect: const ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    activeDotColor: deepOrange,
+                    activeDotColor: blue,
                     expansionFactor: 4,
                     spacing: 6,
                     dotWidth: 10,
@@ -93,8 +99,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                 const Spacer(),
                 FloatingActionButton(
                   onPressed: () {
-                    if (isLast == true) {
-                      NavigateAndRemove(context, ShopAppLoginScreen());
+                    if (isLast == true)
+                    {
+                      NavigateAndRemove(context, LoginScreen());
                     } else {
                       BoardingCotroller.nextPage(
                         duration: const Duration(milliseconds: 750),
@@ -112,7 +119,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
     );
   }
 
-  Widget ItemBilder(BoardingModel model) => Column(
+  Widget ItemBuilder(BoardingModel model) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image(
