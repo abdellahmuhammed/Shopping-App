@@ -5,6 +5,7 @@ import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
 import 'package:shopapp/modules/login/LoginScreen.dart';
 import 'package:shopapp/modules/profile/ProfileScreen.dart';
 import 'package:shopapp/shared/components/components.dart';
+import 'package:shopapp/shared/network/local/sharedpreferences/sharedpreferences.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
 class HomeLayoutScreen extends StatelessWidget
@@ -124,7 +125,11 @@ class HomeLayoutScreen extends StatelessWidget
                   const Spacer(),
                   TextButton(
                     onPressed: () {
-                      NavigateAndRemove(context, LoginScreen());
+                      CacheHelper.removeData(key: 'token').then((value) {
+                        if(value){
+                           NavigateAndRemove(context, LoginScreen());
+                        }
+                      });
                     },
                     child: Row(
                       children: const [

@@ -7,6 +7,7 @@ import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
 import 'package:shopapp/layout/homelayout.dart';
 import 'package:shopapp/modules/Registration/Registration.dart';
 import 'package:shopapp/shared/components/components.dart';
+import 'package:shopapp/shared/network/local/sharedpreferences/sharedpreferences.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -25,16 +26,20 @@ class LoginScreen extends StatelessWidget {
         {
           if (state.loginModel.status)
           {
-            Fluttertoast.showToast(
-                      msg:state.loginModel.message,
-                      toastLength: Toast.LENGTH_LONG,
-                      gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.green,
-                      textColor: Colors.white,
-                      fontSize: 16.0
-                  );
-            NavigateTo(context, const HomeLayoutScreen());
+            CacheHelper.saveData(
+                key:'token' ,
+                value: state.loginModel.data.token).then((value) {
+              Fluttertoast.showToast(
+                  msg:state.loginModel.message,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+              NavigateAndRemove(context, const HomeLayoutScreen());
+            });
           }
           else
           {
@@ -54,7 +59,7 @@ class LoginScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Shop App',
+              'Shop App ',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 23.0,
@@ -151,7 +156,6 @@ class LoginScreen extends StatelessWidget {
                                 password: passwordController.text
                             );
                           }
-                          //  NavigateTo(context, const HomeLayoutScreen());
                         },
                       ),
                       fallback: (context)=> const Center(child:  CircularProgressIndicator()),

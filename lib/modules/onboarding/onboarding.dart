@@ -3,27 +3,25 @@
 import 'package:flutter/material.dart';
 import 'package:shopapp/modules/login/LoginScreen.dart';
 import 'package:shopapp/shared/components/components.dart';
+import 'package:shopapp/shared/network/local/sharedpreferences/sharedpreferences.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class BoardingModel
-{
+class BoardingModel {
   final String title;
   final String image;
 
   BoardingModel({@required this.title, @required this.image});
 }
 
-class OnBoardingScreen extends StatefulWidget
-{
+class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key key}) : super(key: key);
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen>
-{
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   var BoardingCotroller = PageController();
 
   List<BoardingModel> BoardingList = [
@@ -44,6 +42,21 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
   ];
   bool isLast = false;
 
+  void submit(){
+
+    CacheHelper.saveData(
+      key: 'boarding',
+      value: true,
+    ).then((value){
+      if(value){
+        NavigateAndRemove(
+            context,
+            LoginScreen()
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +64,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
         actions: [
           TextButton(
             onPressed: () {
-              NavigateAndRemove(context, LoginScreen());
+              submit();
             },
             child: const Text('skip'),
           ),
@@ -66,13 +79,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                 physics: const BouncingScrollPhysics(),
                 controller: BoardingCotroller,
                 onPageChanged: (int index) {
-                  if (index == BoardingList.length - 1)
-                  {
+                  if (index == BoardingList.length - 1) {
                     setState(() {
                       isLast = true;
                     });
-                  } else
-                  {
+                  } else {
                     setState(() {
                       isLast = false;
                     });
@@ -99,9 +110,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                 const Spacer(),
                 FloatingActionButton(
                   onPressed: () {
-                    if (isLast == true)
-                    {
-                      NavigateAndRemove(context, LoginScreen());
+                    if (isLast == true) {
+                      submit();
                     } else {
                       BoardingCotroller.nextPage(
                         duration: const Duration(milliseconds: 750),
@@ -139,4 +149,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
           ),
         ],
       );
+
+
 }

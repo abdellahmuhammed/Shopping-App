@@ -1,20 +1,42 @@
-// ignore_for_file: camel_case_types, non_constant_identifier_names, missing_return
-
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class sharedHelper {
-  static SharedPreferences _sharedPreferences;
+class CacheHelper {
+  static SharedPreferences sharedPreferences;
 
   static init() async {
-     _sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences = await SharedPreferences.getInstance();
   }
 
- static Future<bool> PutData({@required String key, @required bool value}) async {
-    return await _sharedPreferences.setBool(key, value);
+  static Future<bool> putBoolean({
+    @required String key,
+    @required bool value,
+  }) async {
+    return await sharedPreferences.setBool(key, value);
   }
 
-  static bool GetData({@required String key}) {
-    _sharedPreferences.getBool(key);
+  static dynamic getData({
+    @required String key,
+  }) {
+    return sharedPreferences.get(key);
+  }
+
+  static Future<bool> saveData({
+    @required String key,
+    @required dynamic value,
+  }) async {
+    if (value is String) return await sharedPreferences.setString(key, value);
+    if (value is int) return await sharedPreferences.setInt(key, value);
+    if (value is bool) return await sharedPreferences.setBool(key, value);
+
+    return await sharedPreferences.setDouble(key, value);
+  }
+
+
+  static Future<bool> removeData({
+    @required String key,
+  }) async
+  {
+    return await sharedPreferences.remove(key);
   }
 }
