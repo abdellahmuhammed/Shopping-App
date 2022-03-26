@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopapp/models/home/HomeModel.dart';
 import 'package:shopapp/models/login/LoginModel.dart';
 import 'package:shopapp/modules/categories/categoties.dart';
 import 'package:shopapp/modules/favorite/favorite.dart';
 import 'package:shopapp/modules/produts/produts.dart';
+import 'package:shopapp/shared/components/constant.dart';
 import 'package:shopapp/shared/network/remote/diohelper.dart';
 
 part 'shop_app_state.dart';
@@ -29,14 +31,14 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     emit(confirmepasswordState());
   }
 
-  List<BottomNavigationBarItem> itemBottom = [
+  List<BottomNavigationBarItem> bottomNavBarItem = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
     const BottomNavigationBarItem(icon: Icon(Icons.apps), label: 'Categories'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.favorite), label: 'favorites'),
   ];
 
-  List<Widget> screens = [
+  List<Widget> bottomsScreens = [
     const ProductsScreen(),
     const CategoriesScreen(),
     const FavoriteScreen(),
@@ -68,6 +70,26 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     }).catchError((onError) {
       print('Error happened when user Login ${onError.toString()}');
       emit(UserLoginErrorState(onError));
+    });
+  }
+
+  HomeModel homeModel;
+
+  void getHomeLayoutData() {
+    emit(LoadingHomeLayoutState());
+    DioHelper.getData(
+      url: 'home',
+      token: token,
+    ).then((value)
+    {
+      homeModel = HomeModel.fromJson(value.data);
+      printFullText(homeModel.data.banners.toString());
+      emit(HomeLayoutSuccessState());
+    }).catchError((onError)
+    {
+      print(
+          'error happened when get data to home layout ${onError.toString()}');
+      emit(HomeLayoutErrorState(onError));
     });
   }
 }

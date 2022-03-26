@@ -146,13 +146,13 @@ class HomeLayoutScreen extends StatelessWidget
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(
-            items: cubit.itemBottom,
+            items: cubit.bottomNavBarItem,
             currentIndex: cubit.currentIndex,
             onTap: (int index) {
               cubit.changeBottomNavBar(index);
             },
           ),
-          body: cubit.screens[cubit.currentIndex],
+          body: cubit.bottomsScreens[cubit.currentIndex],
         );
       },
     );

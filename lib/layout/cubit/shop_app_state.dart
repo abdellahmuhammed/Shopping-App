@@ -22,3 +22,13 @@ class UserLoginErrorState extends ShopAppState {
 
   UserLoginErrorState(this.onError);
 }
+
+
+// HomeLayout states
+class LoadingHomeLayoutState extends ShopAppState {}
+class HomeLayoutSuccessState extends ShopAppState {}
+class HomeLayoutErrorState extends ShopAppState {
+  final onError;
+  HomeLayoutErrorState(this.onError);
+}
+
