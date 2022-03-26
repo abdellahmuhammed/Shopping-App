@@ -1,10 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatelessWidget{
   RegistrationScreen({Key key}) : super(key: key);
 
 var emailController = TextEditingController();
@@ -25,6 +27,7 @@ var emailController = TextEditingController();
         return Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Form(

@@ -2,7 +2,9 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
+import 'package:shopapp/layout/homelayout.dart';
 import 'package:shopapp/modules/Registration/Registration.dart';
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/styles/colors.dart';
@@ -18,36 +20,41 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = ShopAppCubit.get(context);
     return BlocConsumer<ShopAppCubit, ShopAppState>(
-      listener: (context, state) {
-        // if (state is LoginScreen)
-        // {
-        //   Fluttertoast.showToast(
-        //       msg:'welcome',
-        //       toastLength: Toast.LENGTH_LONG,
-        //       gravity: ToastGravity.BOTTOM,
-        //       timeInSecForIosWeb: 1,
-        //       backgroundColor: Colors.green,
-        //       textColor: Colors.white,
-        //       fontSize: 16.0
-        //   );
-        // }
-        // else
-        // {
-        //   Fluttertoast.showToast(
-        //       msg: 'error',
-        //       toastLength: Toast.LENGTH_SHORT,
-        //       gravity: ToastGravity.CENTER,
-        //       timeInSecForIosWeb: 1,
-        //       backgroundColor: Colors.red,
-        //       textColor: Colors.white,
-        //       fontSize: 16.0);
-        // }
+      listener: (context, state){
+        if (state is UserLoginSuccessState)
+        {
+          if (state.loginModel.status)
+          {
+            Fluttertoast.showToast(
+                      msg:state.loginModel.message,
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.green,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+            NavigateTo(context, const HomeLayoutScreen());
+          }
+          else
+          {
+            Fluttertoast.showToast(
+                msg:state.loginModel.message,
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+          }
+        }
       },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              'Shop App ',
+              'Shop App',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 23.0,

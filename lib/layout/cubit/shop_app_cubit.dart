@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopapp/models/login/Login.dart';
+import 'package:shopapp/models/login/LoginModel.dart';
 import 'package:shopapp/modules/categories/categoties.dart';
 import 'package:shopapp/modules/favorite/favorite.dart';
 import 'package:shopapp/modules/produts/produts.dart';
@@ -15,7 +15,7 @@ class ShopAppCubit extends Cubit<ShopAppState> {
   static ShopAppCubit get(context) => BlocProvider.of(context);
 
   bool isPassword = true;
-  LoginModel loginModel ;
+  LoginModel loginModel;
 
   void changeIcon() {
     isPassword = !isPassword;
@@ -52,32 +52,22 @@ class ShopAppCubit extends Cubit<ShopAppState> {
   void userLogin({
     @required String email,
     @required String password,
-
-  }){
+  }) {
     emit(LoadingUserLoginState());
     DioHelper.postData(
-        url: 'login',
-        data:{
-          'email':email,
-          'password':password,
-        },
+      url: 'login',
+      data: {
+        'email': email,
+        'password': password,
+      },
     ).then((value) {
+      loginModel = LoginModel.fromJson(value.data);
       print(value.data);
-      print('/ ' * 100);
-      loginModel= LoginModel.fromJson(value.data);
-      print(loginModel);
 
-      emit(UserLoginSuccessState());
-    }).catchError((onError){
+      emit(UserLoginSuccessState(loginModel));
+    }).catchError((onError) {
       print('Error happened when user Login ${onError.toString()}');
       emit(UserLoginErrorState(onError));
     });
   }
-
-
-
-
-
-
-
 }
