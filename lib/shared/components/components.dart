@@ -126,6 +126,7 @@ Widget defultTextFormFiled(
   int minLines = 1,
   Function suffixPressed,
   Function onchange,
+  Function onSubmit,
   Color cursorColor,
   TextDirection textdirection = TextDirection.rtl,
 }) =>
@@ -134,6 +135,7 @@ Widget defultTextFormFiled(
       keyboardType: type,
       cursorColor: cursorColor,
       onTap: onTap,
+      onFieldSubmitted:onSubmit ,
       onChanged: onchange,
       style: Theme.of(context).textTheme.bodyText2,
       decoration: InputDecoration(

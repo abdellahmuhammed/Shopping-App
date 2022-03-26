@@ -21,37 +21,31 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = ShopAppCubit.get(context);
     return BlocConsumer<ShopAppCubit, ShopAppState>(
-      listener: (context, state){
-        if (state is UserLoginSuccessState)
-        {
-          if (state.loginModel.status)
-          {
+      listener: (context, state) {
+        if (state is UserLoginSuccessState) {
+          if (state.loginModel.status) {
             CacheHelper.saveData(
-                key:'token' ,
-                value: state.loginModel.data.token).then((value) {
+                    key: 'token', value: state.loginModel.data.token)
+                .then((value) {
               Fluttertoast.showToast(
-                  msg:state.loginModel.message,
+                  msg: state.loginModel.message,
                   toastLength: Toast.LENGTH_SHORT,
                   gravity: ToastGravity.BOTTOM,
                   timeInSecForIosWeb: 1,
                   backgroundColor: Colors.green,
                   textColor: Colors.white,
-                  fontSize: 16.0
-              );
+                  fontSize: 16.0);
               NavigateAndRemove(context, const HomeLayoutScreen());
             });
-          }
-          else
-          {
+          } else {
             Fluttertoast.showToast(
-                msg:state.loginModel.message,
+                msg: state.loginModel.message,
                 toastLength: Toast.LENGTH_LONG,
                 gravity: ToastGravity.BOTTOM,
                 timeInSecForIosWeb: 1,
                 backgroundColor: Colors.red,
                 textColor: Colors.white,
-                fontSize: 16.0
-            );
+                fontSize: 16.0);
           }
         }
       },
@@ -118,16 +112,23 @@ class LoginScreen extends StatelessWidget {
                           prefixIcon: Icons.lock,
                           suffixIcon: cubit.isPassword
                               ? Icons.visibility
-                              : Icons.visibility_off,
-                          suffixPressed: () {
+                              : Icons.visibility_off, suffixPressed: () {
                         cubit.changeIcon();
-                          },
-                          validate: (String value) {
+                      }, validate: (String value) {
                         if (value.isEmpty) {
                           return ' Password must not be empty';
                         }
                         return null;
-                      }),
+                      },
+                        onSubmit: (value){
+                          if (formKey.currentState.validate()) {
+                            cubit.userLogin(
+                                email: emailController.text,
+                                password: passwordController.text);
+                          }
+                        }
+                      )
+
                     ),
                     const SizedBox(
                       height: 8.0,
@@ -138,42 +139,38 @@ class LoginScreen extends StatelessWidget {
                         const Spacer(),
                         TextButton(
                           onPressed: () {},
-                          child:  Text('Forget Your Password?' ,
+                          child: Text(
+                            'Forget Your Password?',
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
                         )
                       ],
                     ),
                     ConditionalBuilder(
-                      condition:state is! LoadingUserLoginState ,
-                      builder: (context)=> defultMaterialButton(
+                      condition: state is! LoadingUserLoginState,
+                      builder: (context) => defultMaterialButton(
                         text: 'Login',
                         background: grey.withOpacity(.40),
                         function: () {
-                          if(formKey.currentState.validate()){
+                          if (formKey.currentState.validate()) {
                             cubit.userLogin(
                                 email: emailController.text,
-                                password: passwordController.text
-                            );
+                                password: passwordController.text);
                           }
                         },
                       ),
-                      fallback: (context)=> const Center(child:  CircularProgressIndicator()),
+                      fallback: (context) =>
+                          const Center(child: CircularProgressIndicator()),
                     ),
                     Row(
-                      children:  [
-                         Text(
-                          'Do not have account? ',
-                            style: Theme.of(context).textTheme.bodyText1
-                        ),
+                      children: [
+                        Text('Do not have account? ',
+                            style: Theme.of(context).textTheme.bodyText1),
                         TextButton(
-                            onPressed:
-                            ()
-                            {
-                              NavigateTo(context,  RegistrationScreen());
+                            onPressed: () {
+                              NavigateTo(context, RegistrationScreen());
                             },
-                            child: const Text('Register here')
-                        )
+                            child: const Text('Register here'))
                       ],
                     ),
                   ],
