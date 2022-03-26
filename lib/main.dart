@@ -22,13 +22,19 @@ void main() async {
 
   Widget widget;
 
-  if (Onboarding != null) {
-    if (token != null) {
+  if (Onboarding != null)
+  {
+    if (token != null)
+    {
       widget = const HomeLayoutScreen();
-    } else {
+    }
+    else
+    {
       widget = LoginScreen();
     }
-  } else {
+  }
+  else
+  {
     widget = const OnBoardingScreen();
   }
 
@@ -56,7 +62,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ShopAppCubit()..getHomeLayoutData(),
+          create: (context) => ShopAppCubit()..getHomeLayoutData()..getCategoriesModelData(),
         ),
         BlocProvider(
           create: (context) =>

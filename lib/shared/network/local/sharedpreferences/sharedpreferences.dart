@@ -8,12 +8,13 @@ class CacheHelper {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static Future<bool> putBoolean({
-    @required String key,
-    @required bool value,
-  }) async {
-    return await sharedPreferences.setBool(key, value);
-  }
+/* نفس عمل saveData */
+  // static Future<bool> putBoolean({
+  //   @required String key,
+  //   @required bool value,
+  // }) async {
+  //   return await sharedPreferences.setBool(key, value);
+  // }
 
   static dynamic getData({
     @required String key,
@@ -32,11 +33,9 @@ class CacheHelper {
     return await sharedPreferences.setDouble(key, value);
   }
 
-
   static Future<bool> removeData({
     @required String key,
-  }) async
-  {
+  }) async {
     return await sharedPreferences.remove(key);
   }
 }

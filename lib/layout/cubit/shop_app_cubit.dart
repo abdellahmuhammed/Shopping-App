@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopapp/models/Categories/CategoriesModel.dart';
 import 'package:shopapp/models/home/HomeModel.dart';
 import 'package:shopapp/models/login/LoginModel.dart';
 import 'package:shopapp/modules/categories/categoties.dart';
@@ -92,4 +93,29 @@ class ShopAppCubit extends Cubit<ShopAppState> {
       emit(HomeLayoutErrorState(onError));
     });
   }
+
+
+
+
+  CategoriesModel categoriesModel;
+  void getCategoriesModelData() {
+    emit(LoadingHomeLayoutState());
+    DioHelper.getData(
+      url: 'categories',
+    ).then((value)
+    {
+      categoriesModel = CategoriesModel.fromJson(value.data);
+      printFullText(homeModel.data.banners[0].id.toString());
+      emit(CategoriesSuccessState());
+    }).catchError((onError)
+    {
+      print(
+          'error happened when get data to home layout ${onError.toString()}');
+      emit(CategoriesErrorState(onError));
+    });
+  }
+
+
+
+
 }

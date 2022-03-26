@@ -32,3 +32,12 @@ class HomeLayoutErrorState extends ShopAppState {
   HomeLayoutErrorState(this.onError);
 }
 
+
+// Categories state
+
+class CategoriesSuccessState extends ShopAppState {}
+class CategoriesErrorState extends ShopAppState {
+  final onError;
+
+  CategoriesErrorState(this.onError);
+}
