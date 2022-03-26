@@ -20,7 +20,7 @@ class DarkModeCubit extends Cubit<DarkModeStates> {
     } else
     {
       isDarkShow = !isDarkShow;
-      CacheHelper.putBoolean(key: 'isDark', value: isDarkShow).then((value) {
+      CacheHelper.saveData(key: 'isDarkShow', value: isDarkShow).then((value){
         emit(ChangeAppModeState());
       });
     }

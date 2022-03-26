@@ -14,6 +14,12 @@ ThemeData lightTheme = ThemeData(
       fontSize: 16.0,
       fontWeight: FontWeight.normal,
     ),
+    subtitle1: TextStyle(
+      color: Colors.black,
+      fontSize: 14.0,
+      fontWeight: FontWeight.normal,
+    ),
+
   ),
   scaffoldBackgroundColor: Colors.white,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -66,6 +72,12 @@ ThemeData darkTheme = ThemeData(
       fontSize: 16.0,
       fontWeight: FontWeight.normal,
     ),
+    subtitle1: TextStyle(
+      color: Colors.grey,
+      fontSize: 14.0,
+      fontWeight: FontWeight.normal,
+    ),
+
   ),
   scaffoldBackgroundColor: Colors.black,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(

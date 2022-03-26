@@ -16,8 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
-  // bool isDarkShow = CacheHelper.getData(key: 'isDarkShow');
- bool isDarkShow =false;
+  bool isDarkShow = CacheHelper.getData(key: 'isDarkShow');
   bool Onboarding = CacheHelper.getData(key: 'boarding');
   String token = CacheHelper.getData(key: 'token');
 

@@ -20,7 +20,7 @@ class DioHelper {
     @required String url,
      Map < String , dynamic > query,
     String token,
-    String lang = 'ar'
+    String lang = 'en'
   }) async{
     dio.options.headers =
     {
@@ -39,7 +39,7 @@ class DioHelper {
     @required Map < String , dynamic > data,
      Map < String , dynamic > query,
     String token,
-    String lang = 'ar'
+    String lang = 'en'
   }) async
   {
     dio.options.headers ={
