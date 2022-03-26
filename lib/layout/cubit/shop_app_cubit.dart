@@ -83,7 +83,7 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     ).then((value)
     {
       homeModel = HomeModel.fromJson(value.data);
-      printFullText(homeModel.data.banners.toString());
+      printFullText(homeModel.data.banners[0].id.toString());
       emit(HomeLayoutSuccessState());
     }).catchError((onError)
     {
