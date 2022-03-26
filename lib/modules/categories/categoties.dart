@@ -40,7 +40,7 @@ class CategoriesScreen extends StatelessWidget {
     );
   }
 
-
+//dsd
   Widget categoriesBuilder(DataModel model)=> Padding(
     padding: const EdgeInsets.all(15.0),
     child: Row(
