@@ -6,22 +6,7 @@ part of 'shop_app_cubit.dart';
 abstract class ShopAppState {}
 
 class ShopAppInitial extends ShopAppState {}
-
-class changeIconState extends ShopAppState {}
-class confirmepasswordState extends ShopAppState {}
 class changeBottomNavBarState extends ShopAppState {}
-
-// login states
-class LoadingUserLoginState extends ShopAppState {}
-class UserLoginSuccessState extends ShopAppState {
-  final LoginModel loginModel;
-  UserLoginSuccessState(this.loginModel);
-}
-class UserLoginErrorState extends ShopAppState {
-  final onError;
-
-  UserLoginErrorState(this.onError);
-}
 
 
 // HomeLayout states
@@ -40,4 +25,23 @@ class CategoriesErrorState extends ShopAppState {
   final onError;
 
   CategoriesErrorState(this.onError);
+}
+
+
+// Profile states
+class LoadingProfileState extends ShopAppState {}
+class ProfileSuccessState extends ShopAppState {}
+class ProfileErrorState extends ShopAppState {
+  final onError;
+  ProfileErrorState(this.onError);
+}
+
+
+
+// UpdateProfile states
+class LoadingUpdateProfileState extends ShopAppState {}
+class UpdateProfileSuccessState extends ShopAppState {}
+class UpdateProfileErrorState extends ShopAppState {
+  final onError;
+  UpdateProfileErrorState(this.onError);
 }

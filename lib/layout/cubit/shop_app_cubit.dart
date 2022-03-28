@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/models/Categories/CategoriesModel.dart';
@@ -12,25 +11,11 @@ import 'package:shopapp/shared/network/remote/diohelper.dart';
 
 part 'shop_app_state.dart';
 
-class ShopAppCubit extends Cubit<ShopAppState> {
+class ShopAppCubit extends Cubit<ShopAppState>
+{
   ShopAppCubit() : super(ShopAppInitial());
 
   static ShopAppCubit get(context) => BlocProvider.of(context);
-
-  bool isPassword = true;
-  LoginModel loginModel;
-
-  void changeIcon() {
-    isPassword = !isPassword;
-    emit(changeIconState());
-  }
-
-  bool confirmPassword = true;
-
-  void confirmepassword() {
-    confirmPassword = !confirmPassword;
-    emit(confirmepasswordState());
-  }
 
   List<BottomNavigationBarItem> bottomNavBarItem = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -52,28 +37,6 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     emit(changeBottomNavBarState());
   }
 
-  void userLogin({
-    @required String email,
-    @required String password,
-  }) {
-    emit(LoadingUserLoginState());
-    DioHelper.postData(
-      url: 'login',
-      data: {
-        'email': email,
-        'password': password,
-      },
-    ).then((value) {
-      loginModel = LoginModel.fromJson(value.data);
-      print(value.data);
-
-      emit(UserLoginSuccessState(loginModel));
-    }).catchError((onError) {
-      print('Error happened when user Login ${onError.toString()}');
-      emit(UserLoginErrorState(onError));
-    });
-  }
-
   HomeModel homeModel;
 
   void getHomeLayoutData() {
@@ -84,7 +47,7 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     ).then((value)
     {
       homeModel = HomeModel.fromJson(value.data);
-      printFullText(homeModel.data.banners[0].id.toString());
+     // printFullText(homeModel.data.banners[0].id.toString());
       emit(HomeLayoutSuccessState());
     }).catchError((onError)
     {
@@ -94,10 +57,8 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     });
   }
 
-
-
-
   CategoriesModel categoriesModel;
+
   void getCategoriesModelData() {
     emit(LoadingHomeLayoutState());
     DioHelper.getData(
@@ -105,7 +66,7 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     ).then((value)
     {
       categoriesModel = CategoriesModel.fromJson(value.data);
-      printFullText(homeModel.data.banners[0].id.toString());
+     // printFullText(homeModel.data.banners[0].id.toString());
       emit(CategoriesSuccessState());
     }).catchError((onError)
     {
@@ -114,6 +75,50 @@ class ShopAppCubit extends Cubit<ShopAppState> {
       emit(CategoriesErrorState(onError));
     });
   }
+
+// to get profile
+
+  LoginModel userModel;
+
+  void getUserData()
+  {
+    emit(LoadingProfileState());
+    DioHelper.getData(
+        url: 'profile',
+        token: token
+    ).then((value) {
+      userModel = LoginModel.fromJson(value.data);
+      print(userModel.status);
+      print(userModel.message);
+      print(userModel.data);
+
+      emit(ProfileSuccessState());
+    }).catchError((onError){
+      print('Error Happened when get Profile ${onError.toString()}');
+      emit(ProfileErrorState(onError));
+    });
+
+  }
+
+
+  //to update profile
+  // void updateProfile() {
+  //   emit(LoadingUpdateProfileState());
+  //   DioHelper.getData(
+  //     url: 'update-profile',
+  //   ).then((value)
+  //   {
+  //     loginModel = LoginModel.fromJson(value.data);
+  //     printFullText(loginModel.data.name);
+  //     emit(UpdateProfileSuccessState());
+  //   }).catchError((onError)
+  //   {
+  //     print(
+  //         'error happened when Update Profile${onError.toString()}');
+  //     emit(UpdateProfileErrorState(onError));
+  //   });
+  // }
+
 
 
 

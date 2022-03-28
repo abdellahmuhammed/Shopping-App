@@ -12,33 +12,28 @@ import 'package:shopapp/shared/network/local/sharedpreferences/sharedpreferences
 import 'package:shopapp/shared/network/remote/diohelper.dart';
 import 'package:shopapp/shared/styles/themes.dart';
 
-void main() async {
+void main() async
+{
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
   bool isDarkShow = CacheHelper.getData(key: 'isDarkShow');
   bool Onboarding = CacheHelper.getData(key: 'boarding');
   String token = CacheHelper.getData(key: 'token');
-
+  print('token is $token');
+  print('Onboarding is $Onboarding');
+  print('isDarkShow is $isDarkShow');
   Widget widget;
 
-  if (Onboarding != null)
-  {
-    if (token != null)
-    {
+  if (Onboarding != null) {
+    if (token != null) {
       widget = const HomeLayoutScreen();
-    }
-    else
-    {
+    } else {
       widget = LoginScreen();
     }
-  }
-  else
-  {
+  } else {
     widget = const OnBoardingScreen();
   }
-
-  print(Onboarding);
 
   BlocOverrides.runZoned(
     () {
@@ -51,7 +46,8 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget
+{
   final bool isDarkShow;
   final Widget StartWidget;
 
@@ -62,7 +58,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ShopAppCubit()..getHomeLayoutData()..getCategoriesModelData(),
+          create: (context) => ShopAppCubit()
+            ..getHomeLayoutData()
+            ..getCategoriesModelData(),
         ),
         BlocProvider(
           create: (context) =>

@@ -3,7 +3,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 
-class DioHelper {
+class DioHelper
+{
   static Dio dio;
 
   static init() {
@@ -19,7 +20,7 @@ class DioHelper {
       {@required String url,
       Map<String, dynamic> query,
       String token,
-      String lang = 'en'}) async {
+      String lang = 'ar'}) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
@@ -36,7 +37,7 @@ class DioHelper {
       @required Map<String, dynamic> data,
       Map<String, dynamic> query,
       String token,
-      String lang = 'en'}) async {
+      String lang = 'ar'}) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,

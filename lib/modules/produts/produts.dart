@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder/conditional_builder.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
@@ -11,7 +12,7 @@ class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return BlocConsumer<ShopAppCubit, ShopAppState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -36,16 +37,18 @@ class ProductsScreen extends StatelessWidget {
     );
   }
 
-  Widget productsBuilder(HomeModel homeModel, context, CategoriesModel categoriesModel)
-  =>SingleChildScrollView(
+  Widget productsBuilder(
+          HomeModel homeModel, context, CategoriesModel categoriesModel) =>
+      SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CarouselSlider(
               items: homeModel.data.banners
-                  .map((e) => Image(
-                      image: NetworkImage(e.image),
+                  .map(
+                    (e) => Image(
+                      image: NetworkImage(e.image ?? Image.asset('assets/images/loading.gif')),
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -82,11 +85,11 @@ class ProductsScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) =>
                           categoriesBuilder(categoriesModel.data.data[index]),
-                      separatorBuilder: (BuildContext context, int index) => const SizedBox(
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(
                         width: 10,
                       ),
                       itemCount: categoriesModel.data.data.length,
-
                     ),
                   ),
                   const SizedBox(
@@ -102,7 +105,7 @@ class ProductsScreen extends StatelessWidget {
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: 1 / 1.43,
+              childAspectRatio: 1 / 1.7,
               mainAxisSpacing: 1,
               crossAxisSpacing: 1,
               crossAxisCount: 2,
@@ -116,7 +119,7 @@ class ProductsScreen extends StatelessWidget {
         ),
       );
 
-  Widget categoriesBuilder( dataCategoriesModel) => Container(
+  Widget categoriesBuilder(dataCategoriesModel) => Container(
         height: 100,
         width: 100,
         child: Stack(
@@ -147,7 +150,7 @@ class ProductsScreen extends StatelessWidget {
         children: [
           Stack(alignment: Alignment.bottomLeft, children: [
             Image.network(
-              products.image,
+              products.image ?? Image.asset('assets/images/loading.gif') ,
               width: double.infinity,
               height: 150,
             ),
@@ -187,12 +190,15 @@ class ProductsScreen extends StatelessWidget {
                       ),
                     const Spacer(),
                     IconButton(
-                        padding: EdgeInsets.zero,
                         onPressed: () {},
-                        icon: const Icon(
-                          Icons.favorite_border,
-                          size: 15,
-                        ))
+                        icon:const CircleAvatar(
+                          radius: 15,
+                          child:  Icon(
+                            Icons.favorite_border,
+                            size: 15,
+                          ),
+                        ),
+                    ),
                   ],
                 ),
               ],
@@ -201,4 +207,3 @@ class ProductsScreen extends StatelessWidget {
         ],
       );
 }
-

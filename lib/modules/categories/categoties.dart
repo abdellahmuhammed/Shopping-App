@@ -17,50 +17,49 @@ class CategoriesScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = ShopAppCubit.get(context);
         return ConditionalBuilder(
-            condition:cubit.categoriesModel  != null ,
+          condition: cubit.categoriesModel != null,
           builder: (BuildContext context) => ListView.separated(
-            itemBuilder: (BuildContext context, int index) =>categoriesBuilder(cubit.categoriesModel .data.data[index]),
-            separatorBuilder: (BuildContext context, int index) =>MyDivider(),
+            itemBuilder: (BuildContext context, int index) =>
+                categoriesBuilder(cubit.categoriesModel.data.data[index]),
+            separatorBuilder: (BuildContext context, int index) => MyDivider(),
             itemCount: cubit.categoriesModel.data.data.length,
           ),
-            fallback: (BuildContext context) => Column(
-              children: [
-                Center(
-                  child: Image.asset('assets/images/loading1.gif'),
-                ),
-                Text(
-                  'Loading...',
-                  style: Theme.of(context).textTheme.bodyText1,
-                )
-              ],
-            ),
-
+          fallback: (BuildContext context) => Column(
+            children: [
+              Center(
+                child: Image.asset('assets/images/loading1.gif'),
+              ),
+              Text(
+                'Loading...',
+                style: Theme.of(context).textTheme.bodyText1,
+              )
+            ],
+          ),
         );
       },
     );
   }
 
 //dsd
-  Widget categoriesBuilder(DataModel model)=> Padding(
-    padding: const EdgeInsets.all(15.0),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.network(
-        model.image ?? Image.asset('assets/images/loading1.gif') ,
-        height: 80,
-        width: 80,
-        ) ,
-        const SizedBox(width: 10,),
-         Text( model.name,),
-        const Spacer(),
-        IconButton(
-            onPressed: (){
-
-            },
-            icon: const Icon(Icons.add)
-        )
-      ],
-    ),
-  );
+  Widget categoriesBuilder(DataModel model) => Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(
+              model.image ?? Image.asset('assets/images/loading1.gif'),
+              height: 80,
+              width: 80,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              model.name,
+            ),
+            const Spacer(),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.add))
+          ],
+        ),
+      );
 }
