@@ -141,12 +141,13 @@ class SearchScreen extends StatelessWidget {
           separatorBuilder: (context, index) => MyDivider(),
           itemCount: cubit.searchModel.data.data.length,
         ),
-        fallback: (BuildContext context) =>  isSearch  ? const Center(
-          child: Text('Searching about you need you'),
-        )
+        fallback: (BuildContext context) => isSearch
+            ? Center(
+                child: Image.asset('assets/images/936-search.gif'),
+              )
             : const Center(
-          child: CircularProgressIndicator(),
-        ),
+                child: CircularProgressIndicator(),
+              ),
       );
 }
 // Stack(alignment: Alignment.bottomLeft, children: [
