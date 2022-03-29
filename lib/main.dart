@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             ..getHomeLayoutData()
             ..getCategoriesModelData()
               ..getFavorites()
-            // ..getUserProfile(),
+              ..getProfile()
         ),
         BlocProvider(
           create: (context) =>

@@ -118,7 +118,7 @@ Widget defultTextFormFiled(
   @required String label,
   @required IconData prefixIcon,
   IconData suffixIcon,
-  @required Function validate,
+   Function validate,
   Function onTap,
   bool isPassword = false,
   double radius = 0,
@@ -297,6 +297,22 @@ Future<bool> defultFluttertoast({
   backgroundColor: backgroundColor,
   textColor: Colors.white,
   fontSize: 16.0,
+);
+
+Widget defultLoading (
+  context,
+    {
+  String text ='Loading...',
+
+})=>Column(
+  children: [
+    Center(
+      child: Image.asset('assets/images/loading1.gif'),
+    ),
+    Text(text,
+      style: Theme.of(context).textTheme.bodyText1,
+    )
+  ],
 );
 
 

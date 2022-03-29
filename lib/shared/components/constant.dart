@@ -217,5 +217,85 @@ class FavoriteScreen extends StatelessWidget {
 // ),
 
 
+  /*
+   Center(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsetsDirectional.only(top: 50),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * .145,
+            child: Column(
+              children:  [
+                Center(
+                  child: Image(
+                    image: NetworkImage(ProfileModel.product.image),
+                    height: 80,
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.only(start: 15.0),
+          child: Row(
+            children: [
+              const Text('Personal Information'),
+              const Spacer(),
+              MaterialButton(onPressed: (){
+                NavigateTo(context, UpdateProfileScreen());
+              },
+                child: Text('Edit' , style: Theme.of(context).textTheme.bodyText1,),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 50,
+        ),
+        Padding(
+            padding: const EdgeInsetsDirectional.only(start: 15.0),
+            child: defultProfileRow(
+              context,
+              onPressed: (){},
+              text1: 'UserName',
+              text2: ProfileModel.product.name,
+              width: 75,
+            )),
+        Padding(
+          padding: const EdgeInsetsDirectional.only(start: 15.0),
+          child: defultProfileRow(
+            context,
+            onPressed: () {},
+            text1: 'phone number',
+            text2:  '${ProfileModel.product.phone.toInt()}',
+          ),
+        ),
+        Padding(
+            padding: const EdgeInsetsDirectional.only(start: 15.0),
+            child: defultProfileRow(context,
+                onPressed: () {},
+                text1: 'Email',
+                text2: ProfileModel.product.email,
+                width: 112)),
+        Padding(
+          padding: const EdgeInsetsDirectional.only(start: 15.0),
+          child: defultProfileRow(context,
+              onPressed: () {},
+              text1: 'National Id',
+              text2: '12345678912345',
+              width: 75),
+        ),
+      ],
+    ),
+  )
+  * */
+}
+/**/
 
 */

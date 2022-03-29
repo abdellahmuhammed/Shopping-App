@@ -20,7 +20,8 @@ class FavoriteScreen extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             body: ConditionalBuilder(
-              condition: state is !LoadingGetFavoritesState,
+              condition: ShopAppCubit.get(context).getFavoritesModel != null &&
+                  ShopAppCubit.get(context).homeModel != null && ShopAppCubit.get(context).categoriesModel != null,
               builder: (BuildContext context)=>ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) => favoritesBuilder(
@@ -29,11 +30,7 @@ class FavoriteScreen extends StatelessWidget {
                 separatorBuilder: (context, index) => MyDivider(),
                 itemCount: ShopAppCubit.get(context).getFavoritesModel.data.data.length,
               ),
-              fallback:(BuildContext context)=> const Center(
-                child: CircularProgressIndicator(),
-              ) ,
-
-
+              fallback: (BuildContext context) => defultLoading(context , text: 'Loading Favorites...' )
             ),
           ),
         );

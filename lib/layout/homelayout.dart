@@ -1,5 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopapp/layout/DarkMode/dark_mode_cubit.dart';
@@ -10,13 +11,11 @@ import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/network/local/sharedpreferences/sharedpreferences.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
-class HomeLayoutScreen extends StatelessWidget
-{
+class HomeLayoutScreen extends StatelessWidget {
   const HomeLayoutScreen({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     var cubit = ShopAppCubit.get(context);
     return BlocConsumer<ShopAppCubit, ShopAppState>(
       listener: (context, state) {
@@ -35,116 +34,127 @@ class HomeLayoutScreen extends StatelessWidget
                       : const Icon(Icons.light_mode)),
             ],
           ),
-          drawer: Container(
-            width: MediaQuery.of(context).size.width * .6,
-            decoration: const BoxDecoration(boxShadow: [
-              BoxShadow(
-                  color: white,
-                  spreadRadius: 2,
-                  blurRadius: 30,
-                  offset: Offset(8, 5))
-            ]),
-            child: Drawer(
-              child: Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * .28,
-                    width: double.infinity,
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.only(top: 40, start: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * .1,
-                            width: MediaQuery.of(context).size.height * .28,
-                            decoration: const BoxDecoration(
+          drawer: ConditionalBuilder(
+            condition: cubit != null && ShopAppCubit.get(context).getFavoritesModel != null &&
+                ShopAppCubit.get(context).homeModel != null && ShopAppCubit.get(context).categoriesModel != null,
+            builder: (BuildContext context)=>Container(
+              width: MediaQuery.of(context).size.width * .6,
+              decoration: const BoxDecoration(boxShadow: [
+                BoxShadow(
+                    color: white,
+                    spreadRadius: 2,
+                    blurRadius: 30,
+                    offset: Offset(8, 5))
+              ]),
+              child: Drawer(
+                child: Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * .28,
+                      width: double.infinity,
+                      child: Padding(
+                        padding:
+                        const EdgeInsetsDirectional.only(top: 40, start: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: MediaQuery.of(context).size.height * .1,
+                              width: MediaQuery.of(context).size.height * .28,
+                              decoration:  BoxDecoration(
                                 image: DecorationImage(
                                     image: NetworkImage(
-                                        'https://disease.sh/assets/img/flags/eg.png'),
-                                    fit: BoxFit.cover)),
+                                      cubit.getUserProfileModel.data.image,
+                                    ),
+                                    ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Text( cubit.getUserProfileModel.data.name,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text( cubit.getUserProfileModel.data.phone,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        NavigateTo(context, ProfileScreen());
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(Icons.person),
+                          SizedBox(
+                            width: 20,
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          const Text('Name'),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          const Text('01111111111111'),
+                          Text('Profile'),
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      NavigateTo(context, ProfileScreen());
-                    },
-                    child: Row(
-                      children: const [
-                        Icon(Icons.person),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text('Profile'),
-                      ],
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: const [
-                        Icon(Icons.language),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text('Language'),
-                      ],
+                    TextButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: const [
+                          Icon(Icons.language),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text('Language'),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: const [
-                        Icon(Icons.phone),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text('Connect With us'),
-                      ],
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      CacheHelper.removeData(key: 'token').then((value) {
-                        if(value){
-                           NavigateAndRemove(context, LoginScreen());
-                        }
-                      });
-                    },
-                    child: Row(
-                      children: const [
-                        Icon(Icons.logout),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text('Logout'),
-                      ],
+                    TextButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: const [
+                          Icon(Icons.phone),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text('Connect With us'),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        CacheHelper.removeData(key: 'token').then((value) {
+                          if (value) {
+                            NavigateAndRemove(context, LoginScreen());
+                          }
+                        });
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(Icons.logout),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text('Logout'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ),
+            fallback: (context)=> const Center (
+              child:  CircularProgressIndicator(),
             ),
           ),
           bottomNavigationBar: BottomNavigationBar(

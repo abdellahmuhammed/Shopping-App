@@ -17,24 +17,14 @@ class CategoriesScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = ShopAppCubit.get(context);
         return ConditionalBuilder(
-          condition: cubit.categoriesModel != null,
+          condition:  ShopAppCubit.get(context).homeModel != null && ShopAppCubit.get(context).categoriesModel != null,
           builder: (BuildContext context) => ListView.separated(
             itemBuilder: (BuildContext context, int index) =>
                 categoriesBuilder(cubit.categoriesModel.data.data[index] , context),
             separatorBuilder: (BuildContext context, int index) => MyDivider(),
             itemCount: cubit.categoriesModel.data.data.length,
           ),
-          fallback: (BuildContext context) => Column(
-            children: [
-              Center(
-                child: Image.asset('assets/images/loading1.gif'),
-              ),
-              Text(
-                'Loading...',
-                style: Theme.of(context).textTheme.bodyText1,
-              )
-            ],
-          ),
+          fallback: (BuildContext context) => defultLoading(context , text: 'Loading Categories...' )
         );
       },
     );

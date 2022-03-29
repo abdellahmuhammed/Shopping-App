@@ -17,7 +17,7 @@ class UserLoginCubit extends Cubit<UserLoginState>
     emit(ChangeIconState());
   }
 
-  LoginModel userLoginModel;
+  UserModel userLoginModel;
 
   void userLogin({
     @required String email,
@@ -31,7 +31,7 @@ class UserLoginCubit extends Cubit<UserLoginState>
         'password': password,
       },
     ).then((value) {
-      userLoginModel = LoginModel.fromJson(value.data);
+      userLoginModel = UserModel.fromJson(value.data);
       print(userLoginModel.status);
       print(userLoginModel.message);
 

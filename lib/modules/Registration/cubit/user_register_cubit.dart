@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shopapp/models/login/LoginModel.dart';
+import 'package:shopapp/shared/components/constant.dart';
 import 'package:shopapp/shared/network/remote/diohelper.dart';
 
 part 'user_register_state.dart';
@@ -25,7 +26,7 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
   // }
 
 
-  LoginModel userRegisterModel;
+  UserModel userRegisterModel;
 
   void userRegister({
     @required String name ,
@@ -43,11 +44,11 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
           'phone':phone,
         }
     ).then((value) {
-      userRegisterModel = LoginModel.fromJson(value.data);
-      print('Register successfully ${value.data.toString()}');
+      userRegisterModel = UserModel.fromJson(value.data);
+      printFullText('Register successfully ${value.data.toString()}');
       emit(UserRegisterSuccessState(userRegisterModel));
     }).catchError((onError){
-      print('Error happened in Register ${onError.toString()}');
+      printFullText('Error happened in Register ${onError.toString()}');
       emit(UserRegisterErrorState(onError));
 
     });

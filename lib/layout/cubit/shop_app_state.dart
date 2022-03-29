@@ -13,7 +13,7 @@ class changeBottomNavBarState extends ShopAppState {}
 class LoadingHomeLayoutState extends ShopAppState {}
 class HomeLayoutSuccessState extends ShopAppState {}
 class HomeLayoutErrorState extends ShopAppState {
-  final onError;
+  final String  onError;
   HomeLayoutErrorState(this.onError);
 }
 
@@ -21,11 +21,9 @@ class HomeLayoutErrorState extends ShopAppState {
 // Categories state
 class CategoriesSuccessState extends ShopAppState {}
 class CategoriesErrorState extends ShopAppState {
-  final onError;
-
+  final String onError;
   CategoriesErrorState(this.onError);
 }
-
 
 // change GetFavorites states
 class LoadingChangeFavoritesState extends ShopAppState {}
@@ -36,7 +34,7 @@ class ChangeFavoritesSuccessState extends ShopAppState {
 }
 class FavoritesSuccessState extends ShopAppState {}
 class ChangeFavoritesErrorState extends ShopAppState {
-  final onError;
+  final  String onError;
   ChangeFavoritesErrorState(this.onError);
 }
 
@@ -45,7 +43,7 @@ class ChangeFavoritesErrorState extends ShopAppState {
 class LoadingGetFavoritesState extends ShopAppState {}
 class GetFavoritesSuccessState extends ShopAppState {}
 class GetFavoritesErrorState extends ShopAppState {
-  final onError;
+  final  String onError;
   GetFavoritesErrorState(this.onError);
 }
 
@@ -56,7 +54,7 @@ class GetFavoritesErrorState extends ShopAppState {
 class LoadingProfileState extends ShopAppState {}
 class ProfileSuccessState extends ShopAppState {}
 class ProfileErrorState extends ShopAppState {
-  final onError;
+  final String onError;
   ProfileErrorState(this.onError);
 }
 
@@ -66,6 +64,6 @@ class ProfileErrorState extends ShopAppState {
 class LoadingUpdateProfileState extends ShopAppState {}
 class UpdateProfileSuccessState extends ShopAppState {}
 class UpdateProfileErrorState extends ShopAppState {
-  final onError;
+  final String onError;
   UpdateProfileErrorState(this.onError);
 }

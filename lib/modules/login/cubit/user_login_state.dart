@@ -13,7 +13,7 @@ class ConfirmepasswordState extends UserLoginState {}
 class LoadingUserLoginState extends UserLoginState {}
 
 class UserLoginSuccessState extends UserLoginState {
-  final LoginModel userLoginModel;
+  final UserModel userLoginModel;
   UserLoginSuccessState(this.userLoginModel);
 }
 

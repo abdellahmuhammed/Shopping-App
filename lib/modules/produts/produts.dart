@@ -28,21 +28,11 @@ class ProductsScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = ShopAppCubit.get(context);
         return ConditionalBuilder(
-          condition: cubit.homeModel != null && cubit.categoriesModel != null,
-          builder: (BuildContext context) =>
-              productsBuilder(cubit.homeModel, context, cubit.categoriesModel),
-          fallback: (BuildContext context) => Column(
-            children: [
-              Center(
-                child: Image.asset('assets/images/loading1.gif'),
-              ),
-              Text(
-                'Loading...',
-                style: Theme.of(context).textTheme.bodyText1,
-              )
-            ],
-          ),
-        );
+            condition: cubit.homeModel != null && cubit.categoriesModel != null,
+            builder: (BuildContext context) => productsBuilder(
+                cubit.homeModel, context, cubit.categoriesModel),
+            fallback: (BuildContext context) =>
+                defultLoading(context, text: 'Loading Product...' ));
       },
     );
   }
