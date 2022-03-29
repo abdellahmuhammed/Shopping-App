@@ -7,6 +7,7 @@ import 'package:shopapp/layout/DarkMode/dark_mode_cubit.dart';
 import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
 import 'package:shopapp/modules/login/LoginScreen.dart';
 import 'package:shopapp/modules/profile/ProfileScreen.dart';
+import 'package:shopapp/modules/search/searchScreen.dart';
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/network/local/sharedpreferences/sharedpreferences.dart';
 import 'package:shopapp/shared/styles/colors.dart';
@@ -25,6 +26,12 @@ class HomeLayoutScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             actions: [
+              IconButton(
+                  onPressed: () {
+                    NavigateTo(context, SearchScreen());
+                  },
+                  icon: const Icon(Icons.search),
+              ),
               IconButton(
                   onPressed: () {
                     DarkModeCubit.get(context).changeAppMode();
@@ -61,11 +68,9 @@ class HomeLayoutScreen extends StatelessWidget {
                             Container(
                               height: MediaQuery.of(context).size.height * .1,
                               width: MediaQuery.of(context).size.height * .28,
-                              decoration:  BoxDecoration(
+                              decoration:  const BoxDecoration(
                                 image: DecorationImage(
-                                    image: NetworkImage(
-                                      cubit.getUserProfileModel.data.image,
-                                    ),
+                                    image: AssetImage('assets/images/spinner.gif'),
                                     ),
                               ),
                             ),

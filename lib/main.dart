@@ -92,17 +92,7 @@ class MyApp extends StatelessWidget {
                   return NoInternetBuilder(context);
                 }
               },
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                // children: const <Widget>[
-                //   Text(
-                //     'There are no bottom to push :)',
-                //   ),
-                //   Text(
-                //     'Just turn off your internet.',
-                //   ),
-                // ],
-              ),
+              child: Column(),
             ),
           );
         },

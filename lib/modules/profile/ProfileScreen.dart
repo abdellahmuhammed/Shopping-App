@@ -33,14 +33,14 @@ class ProfileScreen extends StatelessWidget {
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * .145,
                   child: Column(
-                    children:  [
-                      Center(
-                        child: Image(
-                          image: NetworkImage(cubit.data.image),
+                    children: const [
+                       Center(
+                        child:  Image(
+                          image: AssetImage('assets/images/spinner.gif'),
                           height: 80,
                         ),
                       ),
-                      const SizedBox(
+                       SizedBox(
                         height: 15,
                       ),
                     ],
