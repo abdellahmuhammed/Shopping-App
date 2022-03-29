@@ -5,7 +5,9 @@ class Assets {
   static const String images3776133 = 'assets/images/3776133.jpg';
   static const String images3859310 = 'assets/images/3859310.jpg';
   static const String images4058271 = 'assets/images/4058271.jpg';
+  static const String imagesInternetconnection = 'assets/images/internetconnection.gif';
   static const String imagesLoading = 'assets/images/loading.gif';
   static const String imagesLoading1 = 'assets/images/loading1.gif';
+  static const String imagesSpinner = 'assets/images/spinner.gif';
 
 }

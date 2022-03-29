@@ -20,7 +20,7 @@ class DioHelper
       {@required String url,
       Map<String, dynamic> query,
       String token,
-      String lang = 'ar'}) async {
+      String lang = 'en'}) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,
@@ -37,7 +37,7 @@ class DioHelper
       @required Map<String, dynamic> data,
       Map<String, dynamic> query,
       String token,
-      String lang = 'ar'}) async {
+      String lang = 'en'}) async {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'lang': lang,

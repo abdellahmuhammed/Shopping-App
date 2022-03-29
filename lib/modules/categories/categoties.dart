@@ -20,7 +20,7 @@ class CategoriesScreen extends StatelessWidget {
           condition: cubit.categoriesModel != null,
           builder: (BuildContext context) => ListView.separated(
             itemBuilder: (BuildContext context, int index) =>
-                categoriesBuilder(cubit.categoriesModel.data.data[index]),
+                categoriesBuilder(cubit.categoriesModel.data.data[index] , context),
             separatorBuilder: (BuildContext context, int index) => MyDivider(),
             itemCount: cubit.categoriesModel.data.data.length,
           ),
@@ -41,15 +41,15 @@ class CategoriesScreen extends StatelessWidget {
   }
 
 //dsd
-  Widget categoriesBuilder(DataModel model) => Padding(
+  Widget categoriesBuilder(DataModel model , context) => Padding(
         padding: const EdgeInsets.all(15.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              model.image ?? Image.asset('assets/images/loading1.gif'),
-              height: 80,
-              width: 80,
+                model.image,
+              height: MediaQuery.of(context).size.height*.1,
+              width: MediaQuery.of(context).size.width*.1,
             ),
             const SizedBox(
               width: 10,

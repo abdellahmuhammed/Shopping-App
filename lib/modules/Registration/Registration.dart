@@ -32,28 +32,20 @@ class RegistrationScreen extends StatelessWidget {
                 value: state.userRegisterModel.data.token,
               ).then((value) {
                 token = state.userRegisterModel.data.token;
-                Fluttertoast.showToast(
-                    msg: state.userRegisterModel.message,
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.green,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                defultFluttertoast(
+                    message: state.userRegisterModel.message,
+                    backgroundColor: Colors.green
+                );
+
                 NavigateAndRemove(
                   context,
                   const HomeLayoutScreen(),
                 );
               });
             } else {
-              Fluttertoast.showToast(
-                msg: state.userRegisterModel.message,
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0,
+              defultFluttertoast(
+                  message: state.userRegisterModel.message,
+                  backgroundColor: Colors.red
               );
             }
           }

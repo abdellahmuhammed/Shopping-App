@@ -3,6 +3,7 @@
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../styles/colors.dart';
 
@@ -282,6 +283,22 @@ Widget defultProfileRow(
             ))
       ],
     );
+
+
+Future<bool> defultFluttertoast({
+  @required String message,
+  @required Color backgroundColor,
+
+})=>  Fluttertoast.showToast(
+  msg: message,
+  toastLength: Toast.LENGTH_SHORT,
+  gravity: ToastGravity.BOTTOM,
+  timeInSecForIosWeb: 1,
+  backgroundColor: backgroundColor,
+  textColor: Colors.white,
+  fontSize: 16.0,
+);
+
 
 //                Container(
 //                   height: 50,

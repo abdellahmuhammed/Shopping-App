@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'colors.dart';
+
 ThemeData lightTheme = ThemeData(
   primarySwatch: blue,
   textTheme: const TextTheme(
@@ -11,7 +12,7 @@ ThemeData lightTheme = ThemeData(
     ),
     bodyText2: TextStyle(
       color: Colors.black,
-      fontSize: 16.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.normal,
     ),
     subtitle1: TextStyle(
@@ -19,7 +20,6 @@ ThemeData lightTheme = ThemeData(
       fontSize: 14.0,
       fontWeight: FontWeight.normal,
     ),
-
   ),
   scaffoldBackgroundColor: Colors.white,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -62,7 +62,7 @@ ThemeData lightTheme = ThemeData(
 );
 ThemeData darkTheme = ThemeData(
   primarySwatch: Colors.blue,
-  drawerTheme:  DrawerThemeData(backgroundColor: Colors.black12.withOpacity(.6)),
+  drawerTheme: DrawerThemeData(backgroundColor: Colors.black12.withOpacity(.6)),
   secondaryHeaderColor: Colors.white,
   textTheme: const TextTheme(
     bodyText1: TextStyle(
@@ -77,7 +77,6 @@ ThemeData darkTheme = ThemeData(
       fontSize: 14.0,
       fontWeight: FontWeight.normal,
     ),
-
   ),
   scaffoldBackgroundColor: Colors.black,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -98,7 +97,7 @@ ThemeData darkTheme = ThemeData(
     selectedLabelStyle: const TextStyle(
         color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
   ),
-  appBarTheme:  AppBarTheme(
+  appBarTheme: AppBarTheme(
     titleSpacing: 20.0,
     backwardsCompatibility: false,
     systemOverlayStyle: SystemUiOverlayStyle(

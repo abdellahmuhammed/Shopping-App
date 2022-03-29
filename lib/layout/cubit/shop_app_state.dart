@@ -19,13 +19,37 @@ class HomeLayoutErrorState extends ShopAppState {
 
 
 // Categories state
-
 class CategoriesSuccessState extends ShopAppState {}
 class CategoriesErrorState extends ShopAppState {
   final onError;
 
   CategoriesErrorState(this.onError);
 }
+
+
+// change GetFavorites states
+class LoadingChangeFavoritesState extends ShopAppState {}
+class ChangeFavoritesSuccessState extends ShopAppState {
+  final ChangeFavoritesModel changeFavoritesModel;
+
+  ChangeFavoritesSuccessState(this.changeFavoritesModel);
+}
+class FavoritesSuccessState extends ShopAppState {}
+class ChangeFavoritesErrorState extends ShopAppState {
+  final onError;
+  ChangeFavoritesErrorState(this.onError);
+}
+
+
+// Profile states
+class LoadingGetFavoritesState extends ShopAppState {}
+class GetFavoritesSuccessState extends ShopAppState {}
+class GetFavoritesErrorState extends ShopAppState {
+  final onError;
+  GetFavoritesErrorState(this.onError);
+}
+
+
 
 
 // Profile states

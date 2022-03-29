@@ -29,29 +29,21 @@ class LoginScreen extends StatelessWidget {
               CacheHelper.saveData(
                       key: 'token', value: state.userLoginModel.data.token)
                   .then((value) {
-                Fluttertoast.showToast(
-                    msg: state.userLoginModel.message,
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.green,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
-                NavigateAndRemove(
+                    token = state.userLoginModel.data.token;
+                    defultFluttertoast(
+                        message: state.userLoginModel.message,
+                        backgroundColor: Colors.green
+                    );
+                    NavigateAndRemove(
                   context,
                   const HomeLayoutScreen(),
                 );
               });
             } else {
-              Fluttertoast.showToast(
-                  msg: state.userLoginModel.message,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
-            }
+              defultFluttertoast(
+                  message: state.userLoginModel.message,
+                  backgroundColor: Colors.red
+              );             }
           }
         },
         builder: (context, state) {
