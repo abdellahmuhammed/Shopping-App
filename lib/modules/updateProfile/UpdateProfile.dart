@@ -1,9 +1,13 @@
-
-// ignore_for_file: must_be_immutable
-
+// ignore_for_file: must_be_immutable, file_names
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
+import 'package:shopapp/layout/homelayout.dart';
+
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/styles/colors.dart';
+
+import '../../shared/network/local/sharedpreferences/sharedpreferences.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   UpdateProfileScreen({Key key}) : super(key: key);
@@ -14,7 +18,27 @@ class UpdateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return BlocConsumer<ShopAppCubit, ShopAppState>(
+      listener: (context, state) {
+        if(state is UpdateProfileSuccessState){
+          if (state.userModel.status)
+          {
+            defultFluttertoast(
+              message: state.userModel.message,
+              backgroundColor: Colors.green,
+            );
+            NavigateTo(context, const HomeLayoutScreen());
+          } else{
+            defultFluttertoast(
+              message: state.userModel.message,
+              backgroundColor: Colors.red,
+            );
+          }
+
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
           appBar: AppBar(),
           body: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -25,8 +49,14 @@ class UpdateProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    if (state is LoadingUpdateProfileState)
+                    const LinearProgressIndicator(),
+                    const SizedBox(height: 15,),
                     Text('Update your account ',
-                        style: Theme.of(context).textTheme.bodyText1),
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyText1),
                     const SizedBox(
                       height: 20,
                     ),
@@ -91,7 +121,12 @@ class UpdateProfileScreen extends StatelessWidget {
                       child: defultMaterialButton(
                           function: () {
                             if (formKey.currentState.validate()) {
-                              print('Update is done');
+                              ShopAppCubit.get(context).updateUserProfile(
+                                name: usernameController.text,
+                                phone: phoneController.text,
+                                email: emailController.text,
+                                image: 'https://student.valuxapps.com/storage/uploads/users/H5Qx2LmO1S_1648557694.jpeg'
+                              );
                             }
                           },
                           background: grey.withOpacity(.25),
@@ -103,6 +138,8 @@ class UpdateProfileScreen extends StatelessWidget {
             ),
           ),
         );
+      },
+    );
   }
 
 }

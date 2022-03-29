@@ -62,7 +62,11 @@ class ProfileErrorState extends ShopAppState {
 
 // UpdateProfile states
 class LoadingUpdateProfileState extends ShopAppState {}
-class UpdateProfileSuccessState extends ShopAppState {}
+class UpdateProfileSuccessState extends ShopAppState {
+ final UserModel userModel;
+
+  UpdateProfileSuccessState(this.userModel);
+}
 class UpdateProfileErrorState extends ShopAppState {
   final String onError;
   UpdateProfileErrorState(this.onError);

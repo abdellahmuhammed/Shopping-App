@@ -46,7 +46,7 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     DioHelper.getData(
       url: 'home',
       token:
-          'VPgBjeuBI3X7Z6r25vIaQ1aemUXarCSePlQUfUhcbOnnTF1WUDEXiftFTuxo33XhEL3cUh',
+          'tUK4wUrqVGXpFxulrD0YTPWfvDcN369H1tzZw5rgps0xwF5IakWh4NgFwok5ZfzYuRRvMV',
     ).then((value) {
       homeModel = HomeModel.fromJson(value.data);
       homeModel.data.products.forEach((element) {
@@ -88,11 +88,11 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     emit(FavoritesSuccessState());
 
     DioHelper.postData(
-            url: 'favorites',
-            data: {'product_id': productId},
-            token:
-                'VPgBjeuBI3X7Z6r25vIaQ1aemUXarCSePlQUfUhcbOnnTF1WUDEXiftFTuxo33XhEL3cUh')
-        .then((value) {
+      url: 'favorites',
+      data: {'product_id': productId},
+      token:
+          'tUK4wUrqVGXpFxulrD0YTPWfvDcN369H1tzZw5rgps0xwF5IakWh4NgFwok5ZfzYuRRvMV',
+    ).then((value) {
       changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
       // printFullTextFullText(homeModel.data.banners[0].id.toString());
 
@@ -117,10 +117,10 @@ class ShopAppCubit extends Cubit<ShopAppState> {
   void getFavorites() {
     emit(LoadingGetFavoritesState());
     DioHelper.getData(
-            url: 'favorites',
-            token:
-                'VPgBjeuBI3X7Z6r25vIaQ1aemUXarCSePlQUfUhcbOnnTF1WUDEXiftFTuxo33XhEL3cUh')
-        .then((value) {
+      url: 'favorites',
+      token:
+          'tUK4wUrqVGXpFxulrD0YTPWfvDcN369H1tzZw5rgps0xwF5IakWh4NgFwok5ZfzYuRRvMV',
+    ).then((value) {
       getFavoritesModel = GetFavoritesModel.fromJson(value.data);
       // printFullTextFullText(value.data.toString());
       emit(GetFavoritesSuccessState());
@@ -130,67 +130,60 @@ class ShopAppCubit extends Cubit<ShopAppState> {
     });
   }
 
-  UserModel getUserProfileModel ;
+  UserModel getUserProfileModel;
 
-  void getProfile(){
+  void getProfile() {
     emit(LoadingProfileState());
     DioHelper.getData(
-        url: 'profile',
-      token: 'VPgBjeuBI3X7Z6r25vIaQ1aemUXarCSePlQUfUhcbOnnTF1WUDEXiftFTuxo33XhEL3cUh'
+      url: 'profile',
+      token:
+          'tUK4wUrqVGXpFxulrD0YTPWfvDcN369H1tzZw5rgps0xwF5IakWh4NgFwok5ZfzYuRRvMV',
     ).then((value) {
-      getUserProfileModel= UserModel.fromJson(value.data);
+      getUserProfileModel = UserModel.fromJson(value.data);
       printFullText(value.data.toString());
       emit(ProfileSuccessState());
-    }).catchError((onError){
-      printFullText('error happened when get user profile ${onError.toString()}');
+    }).catchError((onError) {
+      printFullText(
+          'error happened when get user profile ${onError.toString()}');
       emit(ProfileErrorState(onError));
     });
   }
 
 
 
+ // to update profile
+  void updateUserProfile({
+  @required String name ,
+  @required dynamic phone ,
+  @required String email ,
+   String image  = 'https://student.valuxapps.com/storage/uploads/users/H5Qx2LmO1S_1648557694.jpeg',
+}) {
+    emit(LoadingUpdateProfileState());
+    DioHelper.putData(
+        url: 'update-profile',
+      token: 'tUK4wUrqVGXpFxulrD0YTPWfvDcN369H1tzZw5rgps0xwF5IakWh4NgFwok5ZfzYuRRvMV',
+        data: {
+          'name':name,
+          'phone':phone,
+          'email':email,
+          'image':image,
+        }
+    )
 
-// // to get profile
-//
-//   LoginModel userProfileModel;
-//
-//   void getUserProfile()
-//   {
-//     emit(LoadingProfileState());
-//     DioHelper.getData(
-//         url: 'profile',
-//         token: token
-//     ).then((value)
-//     {
-//       userProfileModel = LoginModel.fromJson(value.data);
-//       printFullText('message is ${userProfileModel.data.id}');
-//       emit(ProfileSuccessState());
-//
-//     }).catchError((onError){
-//       printFullText('Error Happened when get User Profile ${onError.toString()}');
-//       emit(ProfileErrorState(onError));
-//     });
-//
-//   }
+    .then((value)
+    {
+      getUserProfileModel   = UserModel.fromJson(value.data);
+      printFullText(getUserProfileModel.data.toString());
+      printFullText(getUserProfileModel.data.name);
+      emit(UpdateProfileSuccessState(getUserProfileModel));
+      printFullText(
+          'e Update Profile successfully');
+    }).catchError((onError)
+    {
+      printFullText(
+          'error happened when Update Profile${onError.toString()}');
+      emit(UpdateProfileErrorState(onError));
+    });
+  }
 
-/*
-//
-//   to update profile
-//   void updateProfile() {
-//     emit(LoadingUpdateProfileState());
-//     DioHelper.getData(
-//       url: 'update-profile',
-//     ).then((value)
-//     {
-//       loginModel = LoginModel.fromJson(value.data);
-//       printFullTextFullText(loginModel.data.name);
-//       emit(UpdateProfileSuccessState());
-//     }).catchError((onError)
-//     {
-//       printFullText(
-//           'error happened when Update Profile${onError.toString()}');
-//       emit(UpdateProfileErrorState(onError));
-//     });
-//   }
-*/
 }

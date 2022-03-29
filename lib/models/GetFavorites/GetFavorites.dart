@@ -65,17 +65,6 @@ class Product {
   String description;
   String email;
 
-  Product(
-      {this.id,
-        this.price,
-        this.oldPrice,
-        this.discount,
-        this.image,
-        this.name,
-        this.phone,
-        this.email,
-        this.description});
-
   Product.fromJson(Map<String, dynamic> json)
   {
     id = json['id'];

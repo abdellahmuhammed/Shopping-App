@@ -8,8 +8,6 @@ import 'package:shopapp/models/home/HomeModel.dart';
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
-import '../../shared/components/constant.dart';
-
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({Key key}) : super(key: key);
 
@@ -21,7 +19,8 @@ class ProductsScreen extends StatelessWidget {
           if (!state.changeFavoritesModel.status) {
             defultFluttertoast(
                 message: state.changeFavoritesModel.message,
-                backgroundColor: Colors.red);
+                backgroundColor: Colors.red,
+            );
           }
         }
       },
@@ -85,7 +84,7 @@ class ProductsScreen extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) =>
-                          categoriesBuilder(categoriesModel.data.data[index]),
+                          categoriesBuilder(categoriesModel.data.data[index] , context),
                       separatorBuilder: (BuildContext context, int index) =>
                           const SizedBox(
                         width: 10,
@@ -120,26 +119,26 @@ class ProductsScreen extends StatelessWidget {
         ),
       );
 
-  Widget categoriesBuilder(dataCategoriesModel) => SizedBox(
-        height: 100,
-        width: 100,
+  Widget categoriesBuilder(dataCategoriesModel , context) => SizedBox(
+        height: MediaQuery.of(context).size.height * .2,
+    width: MediaQuery.of(context).size.width * .2,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
             Image.network(
               dataCategoriesModel.image,
-              height: 100,
-              width: 100,
+              height: MediaQuery.of(context).size.height*.4,
+              width: MediaQuery.of(context).size.width*.4,
             ),
-            Container(
-              width: 100,
-              color: Colors.black12.withOpacity(.1),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*.4,
               child: Text(
                 dataCategoriesModel.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
                 ),
+                maxLines: 1,
               ),
             ),
           ],
@@ -172,7 +171,16 @@ class ProductsScreen extends StatelessWidget {
                 Text(
                   products.name,
                   style: Theme.of(context).textTheme.bodyText1,
-                  maxLines: 2,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  products.description,
+                  style: Theme.of(context).textTheme.bodyText2,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Row(
@@ -187,19 +195,20 @@ class ProductsScreen extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 12,
                             color: grey,
-                            decoration: TextDecoration.lineThrough),
+                            decoration: TextDecoration.lineThrough,
+                        ),
                       ),
                     const Spacer(),
                     IconButton(
                       onPressed: () {
-                        printFullText('${products.id}');
                         ShopAppCubit.get(context).changeFavorites(products.id);
+
                       },
                       icon: CircleAvatar(
                         radius: 15,
                         backgroundColor:
                             ShopAppCubit.get(context).favorites[products.id]
-                                ? blue
+                                ? Colors.red
                                 : grey,
                         child: const Icon(
                           Icons.favorite_border,

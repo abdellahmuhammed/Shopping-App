@@ -1,9 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, file_names
 
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopapp/layout/homelayout.dart';
 import 'package:shopapp/modules/Registration/cubit/user_register_cubit.dart';
 import 'package:shopapp/shared/components/components.dart';
@@ -18,6 +17,8 @@ class RegistrationScreen extends StatelessWidget {
   var phoneController = TextEditingController();
   var userNameController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+
+  RegistrationScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +37,11 @@ class RegistrationScreen extends StatelessWidget {
                     message: state.userRegisterModel.message,
                     backgroundColor: Colors.green
                 );
-
                 NavigateAndRemove(
                   context,
                   const HomeLayoutScreen(),
                 );
               });
-            } else {
-              defultFluttertoast(
-                  message: state.userRegisterModel.message,
-                  backgroundColor: Colors.red
-              );
             }
           }
         },

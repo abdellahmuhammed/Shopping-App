@@ -42,10 +42,11 @@ class UserRegisterCubit extends Cubit<UserRegisterState> {
           'email':email,
           'password':password,
           'phone':phone,
-        }
+        },
     ).then((value) {
       userRegisterModel = UserModel.fromJson(value.data);
-      printFullText('Register successfully ${value.data.toString()}');
+      printFullText('Register successfully ${userRegisterModel.data.toString()}');
+      printFullText('Register successfully ${userRegisterModel.data.token}');
       emit(UserRegisterSuccessState(userRegisterModel));
     }).catchError((onError){
       printFullText('Error happened in Register ${onError.toString()}');

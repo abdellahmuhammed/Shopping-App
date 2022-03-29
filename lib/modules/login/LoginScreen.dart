@@ -1,7 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shopapp/layout/homelayout.dart';
 import 'package:shopapp/modules/Registration/Registration.dart';
 import 'package:shopapp/modules/login/cubit/user_login_cubit.dart';
@@ -15,7 +16,7 @@ class LoginScreen extends StatelessWidget {
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
-  LoginScreen({Key key}) : super (key: key);
+  LoginScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,18 +24,14 @@ class LoginScreen extends StatelessWidget {
       create: (context) => UserLoginCubit(),
       child: BlocConsumer<UserLoginCubit, UserLoginState>(
         listener: (context, state) {
-          if (state is UserLoginSuccessState)
-          {
+          if (state is UserLoginSuccessState) {
             if (state.userLoginModel.status) {
               CacheHelper.saveData(
-                      key: 'token', value: state.userLoginModel.data.token)
-                  .then((value) {
-                    token = state.userLoginModel.data.token;
-                    defultFluttertoast(
-                        message: state.userLoginModel.message,
-                        backgroundColor: Colors.green
-                    );
-                    NavigateAndRemove(
+                key: 'token',
+                value: state.userLoginModel.data.token,
+              ).then((value) {
+                token = state.userLoginModel.data.token;
+                NavigateAndRemove(
                   context,
                   const HomeLayoutScreen(),
                 );
@@ -42,8 +39,9 @@ class LoginScreen extends StatelessWidget {
             } else {
               defultFluttertoast(
                   message: state.userLoginModel.message,
-                  backgroundColor: Colors.red
-              );             }
+                  backgroundColor: Colors.red,
+              );
+            }
           }
         },
         builder: (context, state) {

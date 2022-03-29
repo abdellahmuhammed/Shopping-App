@@ -20,8 +20,7 @@ class FavoriteScreen extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             body: ConditionalBuilder(
-              condition: ShopAppCubit.get(context).getFavoritesModel != null &&
-                  ShopAppCubit.get(context).homeModel != null && ShopAppCubit.get(context).categoriesModel != null,
+              condition: ShopAppCubit.get(context).getFavoritesModel != null && ShopAppCubit.get(context).homeModel != null,
               builder: (BuildContext context)=>ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) => favoritesBuilder(
@@ -95,7 +94,8 @@ class FavoriteScreen extends StatelessWidget {
                         style: const TextStyle(
                             fontSize: 12,
                             color: grey,
-                            decoration: TextDecoration.lineThrough),
+                            decoration: TextDecoration.lineThrough,
+                        ),
                       ),
                     const Spacer(),
                     IconButton(
@@ -107,7 +107,7 @@ class FavoriteScreen extends StatelessWidget {
                         radius: 15,
                         backgroundColor:
                         ShopAppCubit.get(context).favorites[favModel.product.id]
-                            ? blue
+                            ? Colors.red
                             : grey,
                         child: const Icon(
                           Icons.favorite_border,
