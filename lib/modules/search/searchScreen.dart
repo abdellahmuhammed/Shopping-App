@@ -7,7 +7,6 @@ import 'package:shopapp/layout/cubit/shop_app_cubit.dart';
 import 'package:shopapp/models/search/SearchModel.dart';
 import 'package:shopapp/modules/search/cubit/search_cubit.dart';
 import 'package:shopapp/shared/components/components.dart';
-import 'package:shopapp/shared/components/constant.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -23,127 +22,131 @@ class SearchScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = SearchCubit.get(context);
-          return BlocConsumer<ShopAppCubit, ShopAppState>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              return SafeArea(
-                child: Scaffold(
-                  body: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: defultTextFormFiled(context,
-                            controller: searchController,
-                            type: TextInputType.text,
-                            label: 'Searching',
-                            prefixIcon: Icons.search, onSubmit: (String text) {
-                          SearchCubit.get(context).getSearch(text);
-                        }),
-                      ),
-                      if (state is LoadingSearchState)
-                        const LinearProgressIndicator(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        child: ConditionalBuilder(
-                          condition: cubit.searchModel != null,
-                          builder: (BuildContext context) => ListView.separated(
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) =>
-                                searchBuilder(context,
-                                    cubit.searchModel.data.data[index]),
-                            separatorBuilder: (context, index) => MyDivider(),
-                            itemCount: cubit.searchModel.data.data.length,
-                          ),
-                          fallback: (BuildContext context) => const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      ),
-                    ],
+          return SafeArea(
+            child: Scaffold(
+              body: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: defultTextFormFiled(context,
+                        controller: searchController,
+                        type: TextInputType.text,
+                        label: 'Searching',
+                        prefixIcon: Icons.search, onSubmit: (String text) {
+                      SearchCubit.get(context).getSearch(text);
+                    }),
                   ),
-                ),
-              );
-            },
+                  if (state is LoadingSearchState)
+                    const LinearProgressIndicator(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(child: searchBuilderItem(cubit, isSearch: true)),
+                ],
+              ),
+            ),
           );
         },
       ),
     );
   }
 
-  Widget searchBuilder(context, SearchData searchDataModel) => Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Stack(alignment: Alignment.bottomLeft, children: [
-            Image.network(
-              searchDataModel.image,
-              width: MediaQuery.of(context).size.width * .2,
-              height: MediaQuery.of(context).size.height * .2,
-            ),
-          ]),
-          const SizedBox(
-            width: 20,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * .2,
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      searchDataModel.name,
-                      style: Theme.of(context).textTheme.bodyText1,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      searchDataModel.description,
-                      style: Theme.of(context).textTheme.bodyText2,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const Spacer(),
-                    Row(
+  Widget searchBuilder(context, SearchData searchDataModel) =>
+      BlocConsumer<ShopAppCubit, ShopAppState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Stack(alignment: Alignment.bottomLeft, children: [
+                Image.network(
+                  searchDataModel.image,
+                  width: MediaQuery.of(context).size.width * .2,
+                  height: MediaQuery.of(context).size.height * .2,
+                ),
+              ]),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * .2,
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          searchDataModel.price.toString(),
+                          searchDataModel.name,
+                          style: Theme.of(context).textTheme.bodyText1,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          searchDataModel.description,
                           style: Theme.of(context).textTheme.bodyText2,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const Spacer(),
-                        IconButton(
-                          onPressed: () {
-                            printFullText('${searchDataModel.id}');
-                            ShopAppCubit.get(context)
-                                .changeFavorites(searchDataModel.id);
-                          },
-                          icon: CircleAvatar(
-                            radius: 15,
-                            backgroundColor: ShopAppCubit.get(context)
-                                    .favorites[searchDataModel.id]
-                                ? Colors.red
-                                : grey,
-                            child: const Icon(
-                              Icons.favorite_border,
-                              size: 15,
-                              color: white,
+                        Row(
+                          children: [
+                            Text(
+                              searchDataModel.price.toString(),
+                              style: Theme.of(context).textTheme.bodyText2,
                             ),
-                          ),
+                            const Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                ShopAppCubit.get(context)
+                                    .changeFavorites(searchDataModel.id);
+                              },
+                              icon: CircleAvatar(
+                                radius: 15,
+                                backgroundColor: ShopAppCubit.get(context)
+                                        .favorites[searchDataModel.id]
+                                    ? Colors.red
+                                    : grey,
+                                child: const Icon(
+                                  Icons.favorite_border,
+                                  size: 15,
+                                  color: white,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
+      );
+
+  Widget searchBuilderItem(cubit, {isSearch = false}) => ConditionalBuilder(
+        condition: cubit.searchModel != null,
+        builder: (BuildContext context) => ListView.separated(
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) =>
+              searchBuilder(context, cubit.searchModel.data.data[index]),
+          separatorBuilder: (context, index) => MyDivider(),
+          itemCount: cubit.searchModel.data.data.length,
+        ),
+        fallback: (BuildContext context) =>  isSearch  ? const Center(
+          child: Text('Searching about you need you'),
+        )
+            : const Center(
+          child: CircularProgressIndicator(),
+        ),
       );
 }
 // Stack(alignment: Alignment.bottomLeft, children: [
