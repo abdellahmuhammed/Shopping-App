@@ -159,11 +159,12 @@ class HomeLayoutScreen extends StatelessWidget {
             height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               defaultLaunchRrl(icon: FontAwesomeIcons.github, Url: 'https://github.com/abdellahmuhammed'),
               defaultLaunchRrl(icon: FontAwesomeIcons.linkedin, Url: 'https://www.linkedin.com/in/abdellah-muhammed-9984781a9'),
-              defaultLaunchRrl(icon: FontAwesomeIcons.telegram, Url: 'https://t.me/01126017421'),
-              defaultLaunchRrl(icon: FontAwesomeIcons.whatsapp, Url: 'https://api.whatsapp.com/send/?phone=01126017421&text&app_absent=0')
+              defaultLaunchRrl(icon: FontAwesomeIcons.telegram, Url: 'https://t.me/+201126017421'),
+              // defaultLaunchRrl(icon: FontAwesomeIcons.whatsapp, Url: 'https://api.whatsapp.com/send/?phone=01126017421&text&app_absent=0')
 
             ],
           ),
