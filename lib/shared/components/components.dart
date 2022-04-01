@@ -4,6 +4,8 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../styles/colors.dart';
 
@@ -315,61 +317,16 @@ Widget defultLoading (
   ],
 );
 
+void _launchURL(String _url) async {
+  if (!await launch(_url)) throw 'Could not launch $_url';
+}
 
-//                Container(
-//                   height: 50,
-//                   width: 120,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(15),
-//                     color: Colors.grey.withOpacity(.5),
-//                   ),
-//                   child: MaterialButton(
-//                     onPressed: () {
-//                       NavigateTo(context, Covid19LoginScreen());
-//                     },
-//                     child: const Text(
-//                       'Login',
-//                       style: TextStyle(
-//                           color: black,
-//                           fontSize: 23,
-//                           fontWeight: FontWeight.bold),
-//                     ),
-//                   ),
-//                 ),
-
-// class MyStatefulWidget extends StatefulWidget {
-//   const MyStatefulWidget({Key key}) : super(key: key);
-//
-//   @override
-//   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-// }
-//
-// class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-//   String dropdownValue = 'One';
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return DropdownButton<String>(
-//       value: dropdownValue,
-//       icon: const Icon(Icons.arrow_downward),
-//       elevation: 16,
-//       style: const TextStyle(color: Colors.deepPurple),
-//       underline: Container(
-//         height: 2,
-//         color: Colors.deepPurpleAccent,
-//       ),
-//       onChanged: (String newValue) {
-//         setState(() {
-//           dropdownValue = newValue;
-//         });
-//       },
-//       items: <String>['One', 'Two', 'Free', 'Four']
-//           .map<DropdownMenuItem<String>>((String value) {
-//         return DropdownMenuItem<String>(
-//           value: value,
-//           child: Text(value),
-//         );
-//       }).toList(),
-//     );
-//   }
-// }
+Widget defaultLaunchRrl ( {
+  @required IconData icon,
+  @required String Url,
+})=>IconButton(
+  icon:  Icon(icon),
+  onPressed: (){
+    _launchURL(Url);
+  },
+);

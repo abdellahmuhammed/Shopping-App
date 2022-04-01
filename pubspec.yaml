@@ -33,15 +33,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  webview_flutter: ^3.0.1
   shared_preferences: ^2.0.13
   smooth_page_indicator: ^1.0.0+2
-  google_maps_flutter: ^2.1.2
   fluttertoast: ^8.0.9
+  url_launcher: ^6.0.20
   carousel_slider: ^4.0.0
   flutter_offline: "^2.1.0"
-
-
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   flutter_test:

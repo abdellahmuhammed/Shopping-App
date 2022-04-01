@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                 token = state.userLoginModel.data.token;
                 NavigateAndRemove(
                   context,
-                  const HomeLayoutScreen(),
+                   HomeLayoutScreen(),
                 );
               });
             } else {

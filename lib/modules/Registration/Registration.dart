@@ -39,7 +39,7 @@ class RegistrationScreen extends StatelessWidget {
                 );
                 NavigateAndRemove(
                   context,
-                  const HomeLayoutScreen(),
+                   HomeLayoutScreen(),
                 );
               });
             }

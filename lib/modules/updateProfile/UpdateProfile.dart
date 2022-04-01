@@ -7,7 +7,6 @@ import 'package:shopapp/layout/homelayout.dart';
 import 'package:shopapp/shared/components/components.dart';
 import 'package:shopapp/shared/styles/colors.dart';
 
-import '../../shared/network/local/sharedpreferences/sharedpreferences.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   UpdateProfileScreen({Key key}) : super(key: key);
@@ -27,7 +26,7 @@ class UpdateProfileScreen extends StatelessWidget {
               message: state.userModel.message,
               backgroundColor: Colors.green,
             );
-            NavigateTo(context, const HomeLayoutScreen());
+            NavigateTo(context,  HomeLayoutScreen());
           } else{
             defultFluttertoast(
               message: state.userModel.message,

@@ -66,18 +66,22 @@ ThemeData darkTheme = ThemeData(
   secondaryHeaderColor: Colors.white,
   textTheme: const TextTheme(
     bodyText1: TextStyle(
-        color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+      color: Colors.white,
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+    ),
     bodyText2: TextStyle(
       color: Colors.white,
-      fontSize: 16.0,
+      fontSize: 14.0,
       fontWeight: FontWeight.normal,
     ),
     subtitle1: TextStyle(
-      color: Colors.grey,
+      color: Colors.white,
       fontSize: 14.0,
       fontWeight: FontWeight.normal,
     ),
   ),
+
   scaffoldBackgroundColor: Colors.black,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
     backgroundColor: Colors.black12.withOpacity(.6),
